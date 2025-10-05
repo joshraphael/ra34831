@@ -8,7 +8,7 @@ DOLPHIN_DIR := /mnt/c/Program\ Files/Dolphin/2025Sep25/x64
 
 load:
 	if [ -z "${checkpoint}" ]; then echo "empty checkpoint selected during load"; exit 1; fi;
-	if [[ ${checkpoint} != @(makstart|mak1|mak2|mak3|mak4|mak5|mak6|mak7|mak8|mak9|mak10|makend|pel1start) ]]; then echo "invalid checkpoint selected to load: ${checkpoint}"; exit 1; fi;
+	if [[ ${checkpoint} != @(makstart|mak1|mak2|mak3|mak4|mak5|mak6|mak7|mak8|mak9|mak10|makend|pel1start|pel11|pel12|pel13|pel14|pel15|pel16|pel17|pel18|pel1end) ]]; then echo "invalid checkpoint selected to load: ${checkpoint}"; exit 1; fi;
 	cp saves/${checkpoint}.sav ${SAVE_DIR}/${WII_ID}.s0${SAVE_SLOT}
 
 compile:
