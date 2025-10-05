@@ -1,16 +1,33 @@
 # Design Doc for [Call of Duty: World at War](https://retroachievements.org/game/34831)
 ## Table of Contents
-1. [About](#about)
-2. [Learnings](#learnings)
+1. [Assets](#assets)
+2. [About](#about)
 3. [Code Notes](#code-notes)
 4. [Achievements](#achievements)
 5. [Leaderboards](#leaderboards)
+## Assets
+<sub>[Back to Table of Contents](#table-of-contents)</sub>
+### Assets Navigation
+1. [Game Icon](#game-icon)
+2. [Box Art](#box-art)
+3. [Title Screen](#title-screen)
+4. [In-Game](#in-game)
+### [Game Icon](https://media.retroachievements.org/Images/000001.png)
+<sub>[Back to navigation](#assets-navigation)</sub><br>
+<br>![Images/000001.png](Images/000001.png)<br>
+### [Box Art](https://media.retroachievements.org/Images/118918.png)
+<sub>[Back to navigation](#assets-navigation)</sub><br>
+<br>![Images/118918.png](Images/118918.png)<br>
+### [Title Screen](https://media.retroachievements.org/Images/118916.png)
+<sub>[Back to navigation](#assets-navigation)</sub><br>
+<br>![Images/118916.png](Images/118916.png)<br>
+### [In-Game](https://media.retroachievements.org/Images/118917.png)
+<sub>[Back to navigation](#assets-navigation)</sub><br>
+<br>![Images/118917.png](Images/118917.png)<br>
 ## About
 <sub>[Back to Table of Contents](#table-of-contents)</sub>
 - [Game Page](https://retroachievements.org/game/34831)
 - [Forum Topic](https://retroachievements.org/forums/topic/32460)
-## Learnings
-<sub>[Back to Table of Contents](#table-of-contents)</sub>
 ## Code Notes
 <sub>[Back to Table of Contents](#table-of-contents)</sub>
 ### Code Notes Navigation
