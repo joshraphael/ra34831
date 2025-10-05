@@ -31,50 +31,58 @@
 ## Code Notes
 <sub>[Back to Table of Contents](#table-of-contents)</sub>
 ### Code Notes Navigation
-1. [Code Note 0x6969e4](#code-note-0x6969e4)
-2. [Code Note 0x6969e8](#code-note-0x6969e8)
-3. [Code Note 0x6969ec](#code-note-0x6969ec)
-4. [Code Note 0x6d308e](#code-note-0x6d308e)
-5. [Code Note 0x6f1560](#code-note-0x6f1560)
-6. [Code Note 0x6f26f0](#code-note-0x6f26f0)
-7. [Code Note 0x7238d8](#code-note-0x7238d8)
-8. [Code Note 0x727cbe](#code-note-0x727cbe)
-9. [Code Note 0x727ce0](#code-note-0x727ce0)
-10. [Code Note 0x727ce4](#code-note-0x727ce4)
-11. [Code Note 0x727cee](#code-note-0x727cee)
-12. [Code Note 0x727d10](#code-note-0x727d10)
-13. [Code Note 0x727d20](#code-note-0x727d20)
-14. [Code Note 0x727d28](#code-note-0x727d28)
-15. [Code Note 0x727d38](#code-note-0x727d38)
-16. [Code Note 0x727d3a](#code-note-0x727d3a)
-17. [Code Note 0x727d3c](#code-note-0x727d3c)
-18. [Code Note 0x727d3e](#code-note-0x727d3e)
-19. [Code Note 0x727d44](#code-note-0x727d44)
-20. [Code Note 0x727d48](#code-note-0x727d48)
-21. [Code Note 0x727d4c](#code-note-0x727d4c)
-22. [Code Note 0x727de0](#code-note-0x727de0)
-23. [Code Note 0x727de2](#code-note-0x727de2)
-24. [Code Note 0x727de4](#code-note-0x727de4)
-25. [Code Note 0x727de6](#code-note-0x727de6)
-26. [Code Note 0x727dec](#code-note-0x727dec)
-27. [Code Note 0x727dee](#code-note-0x727dee)
-28. [Code Note 0x727df0](#code-note-0x727df0)
-29. [Code Note 0x727df2](#code-note-0x727df2)
-30. [Code Note 0x727df8](#code-note-0x727df8)
-31. [Code Note 0x727dfa](#code-note-0x727dfa)
-32. [Code Note 0x727e5c](#code-note-0x727e5c)
-33. [Code Note 0x727e5d](#code-note-0x727e5d)
-34. [Code Note 0x727e5e](#code-note-0x727e5e)
-35. [Code Note 0x727e5f](#code-note-0x727e5f)
-36. [Code Note 0x729b6c](#code-note-0x729b6c)
-37. [Code Note 0x77032a](#code-note-0x77032a)
-38. [Code Note 0x844340](#code-note-0x844340)
-39. [Code Note 0x8691a0](#code-note-0x8691a0)
-40. [Code Note 0x99af62](#code-note-0x99af62)
-41. [Code Note 0xa621a0](#code-note-0xa621a0)
-42. [Code Note 0x1452056](#code-note-0x1452056)
-43. [Code Note 0x15120ec](#code-note-0x15120ec)
-44. [Code Note 0x1691ae4](#code-note-0x1691ae4)
+1. [Code Note 0x000000](#code-note-0x000000)
+2. [Code Note 0x6969e4](#code-note-0x6969e4)
+3. [Code Note 0x6969e8](#code-note-0x6969e8)
+4. [Code Note 0x6969ec](#code-note-0x6969ec)
+5. [Code Note 0x6d308e](#code-note-0x6d308e)
+6. [Code Note 0x6f1560](#code-note-0x6f1560)
+7. [Code Note 0x6f26f0](#code-note-0x6f26f0)
+8. [Code Note 0x7238d8](#code-note-0x7238d8)
+9. [Code Note 0x727cbe](#code-note-0x727cbe)
+10. [Code Note 0x727ce0](#code-note-0x727ce0)
+11. [Code Note 0x727ce4](#code-note-0x727ce4)
+12. [Code Note 0x727cee](#code-note-0x727cee)
+13. [Code Note 0x727d10](#code-note-0x727d10)
+14. [Code Note 0x727d20](#code-note-0x727d20)
+15. [Code Note 0x727d28](#code-note-0x727d28)
+16. [Code Note 0x727d38](#code-note-0x727d38)
+17. [Code Note 0x727d3a](#code-note-0x727d3a)
+18. [Code Note 0x727d3c](#code-note-0x727d3c)
+19. [Code Note 0x727d3e](#code-note-0x727d3e)
+20. [Code Note 0x727d44](#code-note-0x727d44)
+21. [Code Note 0x727d48](#code-note-0x727d48)
+22. [Code Note 0x727d4c](#code-note-0x727d4c)
+23. [Code Note 0x727de0](#code-note-0x727de0)
+24. [Code Note 0x727de2](#code-note-0x727de2)
+25. [Code Note 0x727de4](#code-note-0x727de4)
+26. [Code Note 0x727de6](#code-note-0x727de6)
+27. [Code Note 0x727dec](#code-note-0x727dec)
+28. [Code Note 0x727dee](#code-note-0x727dee)
+29. [Code Note 0x727df0](#code-note-0x727df0)
+30. [Code Note 0x727df2](#code-note-0x727df2)
+31. [Code Note 0x727df8](#code-note-0x727df8)
+32. [Code Note 0x727dfa](#code-note-0x727dfa)
+33. [Code Note 0x727e5c](#code-note-0x727e5c)
+34. [Code Note 0x727e5d](#code-note-0x727e5d)
+35. [Code Note 0x727e5e](#code-note-0x727e5e)
+36. [Code Note 0x727e5f](#code-note-0x727e5f)
+37. [Code Note 0x729b6c](#code-note-0x729b6c)
+38. [Code Note 0x77032a](#code-note-0x77032a)
+39. [Code Note 0x7aa8a0](#code-note-0x7aa8a0)
+40. [Code Note 0x844340](#code-note-0x844340)
+41. [Code Note 0x8691a0](#code-note-0x8691a0)
+42. [Code Note 0x99af62](#code-note-0x99af62)
+43. [Code Note 0xa621a0](#code-note-0xa621a0)
+44. [Code Note 0x1452056](#code-note-0x1452056)
+45. [Code Note 0x15120ec](#code-note-0x15120ec)
+46. [Code Note 0x1691ae4](#code-note-0x1691ae4)
+### Code Note 0x000000
+<sub>[Back to navigation](#code-notes-navigation)</sub><br>
+<br>Author: [joshraphael](https://retroachievements.org/user/joshraphael)<br>
+```txt
+RAScript: https://github.com/joshraphael/ra34831/blob/main/34831.rascript
+```
 ### Code Note 0x6969e4
 <sub>[Back to navigation](#code-notes-navigation)</sub><br>
 <br>Author: [joshraphael](https://retroachievements.org/user/joshraphael)<br>
@@ -111,7 +119,9 @@
 ui = Not in mission (Main Menu)
 mak = Semper Fi
 pel1 = Little Resistance
-pel2a = Hard Landing
+pel2a = Hard Landing (Part 1)
+pel2b_load = In-Between Part 1and Part 2
+pel2b = Hard Landing (Part 2)
 sniper = Vendetta
 see1 = Their Land, Their Blood
 pel1a = Burn 'em Out
@@ -130,6 +140,25 @@ ber3b = Downfall
 <br>Author: [joshraphael](https://retroachievements.org/user/joshraphael)<br>
 ```txt
 [ASCII Text] Map Name (Better than 0x6f1560)
+
+ui = Not in mission (Main Menu)
+mak = Semper Fi
+pel1 = Little Resistance
+pel2a = Hard Landing (Part 1)
+pel2b_load = In-Between Part 1and Part 2
+pel2b = Hard Landing (Part 2)
+sniper = Vendetta
+see1 = Their Land, Their Blood
+pel1a = Burn 'em Out
+pel1b = Relentless
+see2 = Blood & Iron
+ber1 = Ring of Steel
+ber2 = Eviction
+oki2 = Blowtorch & Corkscrew
+oki3 = Breaking Point
+oki3_load = Loading
+ber3 = Heart of the Riech
+ber3b = Downfall
 ```
 ### Code Note 0x7238d8
 <sub>[Back to navigation](#code-notes-navigation)</sub><br>
@@ -335,7 +364,7 @@ Type 100
 [16-bit BE] Ammo Count
 
 --- Mission 2
-Number of Primary Grenades
+Number of Explosive Grenades
 ```
 ### Code Note 0x727df0
 <sub>[Back to navigation](#code-notes-navigation)</sub><br>
@@ -347,7 +376,7 @@ Number of Primary Grenades
 Number Of Primary Grenades
 
 --- Mission 2
-Primary Weapon Clip
+M1 Garand Bayonet
 ```
 ### Code Note 0x727df2
 <sub>[Back to navigation](#code-notes-navigation)</sub><br>
@@ -365,7 +394,7 @@ Nambu
 [16-bit BE] Ammo Count
 
 --- Mission 2
-Number of Secondary Grenades
+Number of Smoke Grenades
 ```
 ### Code Note 0x727dfa
 <sub>[Back to navigation](#code-notes-navigation)</sub><br>
@@ -505,6 +534,16 @@ Bit 7 = N/A
 0x0002 = Hard
 0x0003 = Veteran
 ```
+### Code Note 0x7aa8a0
+<sub>[Back to navigation](#code-notes-navigation)</sub><br>
+<br>Author: [joshraphael](https://retroachievements.org/user/joshraphael)<br>
+```txt
+[32-bit BE] Event Flag?
+
+--- Mission 2
+0x00000000 = Radio Destroyed
+0x00000001 = Radio Not Destroyed
+```
 ### Code Note 0x844340
 <sub>[Back to navigation](#code-notes-navigation)</sub><br>
 <br>Author: [joshraphael](https://retroachievements.org/user/joshraphael)<br>
@@ -537,7 +576,43 @@ levelshots / autosave / autosave_makend
 
 --- Mission 2 (Little Resistance)
 levelshots/autosave/autosave_pel1start
+levelshots / autosave / autosave_pel11
 levelshots / autosave / autosave_pel12
+levelshots / autosave / autosave_pel13
+levelshots / autosave / autosave_pel14
+levelshots / autosave / autosave_pel15
+levelshots / autosave / autosave_pel16
+levelshots / autosave / autosave_pel17
+levelshots / autosave / autosave_pel18
+levelshots / autosave / autosave_pel1end
+
+--- Mission 3 (Hard Landing Part 1)
+levelshots/autosave/autosave_pel2astart
+levelshots / autosave / autosave_pel2a1
+levelshots / autosave / autosave_pel2a2
+levelshots / autosave / autosave_pel2a3
+levelshots / autosave / autosave_pel2a4
+levelshots / autosave / autosave_pel2a5
+levelshots / autosave / autosave_pel2a6
+levelshots / autosave / autosave_pel2a7
+levelshots / autosave / autosave_pel2a8
+levelshots / autosave / autosave_pel2aend
+
+--- Mission 3 (Hard Landing Part 2)
+levelshots/autosave/autosave_pel2bstart
+levelshots / autosave / autosave_pel2b1
+levelshots / autosave / autosave_pel2b2
+levelshots / autosave / autosave_pel2b3
+levelshots / autosave / autosave_pel2b4
+levelshots / autosave / autosave_pel2b5
+levelshots / autosave / autosave_pel2b6
+levelshots / autosave / autosave_pel2b7
+levelshots / autosave / autosave_pel2b8
+levelshots / autosave / autosave_pel2b9
+levelshots / autosave / autosave_pel2b10
+levelshots / autosave / autosave_pel2b11
+levelshots / autosave / autosave_pel2b12
+levelshots / autosave / autosave_pel2bend
 
 --- Mission 4 (Vendetta)
 levelshots/autosave/autosave_sniperstart
