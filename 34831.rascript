@@ -2,7 +2,7 @@
 // #ID = 34831
 
 function MapName() => 0x006f26f0
-function MissionTimer() => dword_be(0x01691ae4)
+function MissionTimer() => dword_be(0x007238d8)
 function Difficulty() => word_be(0x0077032a)
 
 class Mission {
@@ -49,8 +49,6 @@ for mission in missions {
         description = format("Complete {0} on any difficulty.", mission.title),
         points = 5,
         trigger = (
-            prior(MissionTimer()) > 0 &&
-            MissionTimer() == 0 &&
             ascii_string_equals(
                 address = MapName(),
                 string = mission.key,
@@ -71,8 +69,6 @@ for mission in missions {
         description = format("Complete {0} on verteran difficulty.", mission.title),
         points = 10,
         trigger = (
-            prior(MissionTimer()) > 0 &&
-            MissionTimer() == 0 &&
             Difficulty() == 0x0003 &&
             ascii_string_equals(
                 address = MapName(),
