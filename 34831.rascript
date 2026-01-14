@@ -1,6 +1,7 @@
 // Call of Duty: World at War
 // #ID = 34831
 
+
 function MapName() => 0x006f26f0
 function MissionTimer() => dword_be(0x007238d8)
 function Difficulty() => word_be(0x0077032a)
