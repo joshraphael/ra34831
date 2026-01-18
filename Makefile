@@ -4,7 +4,7 @@ WII_ID := RVYE52
 GAME_ID := 34831
 SAVE_SLOT := 1
 RASCRIPT_CLI := ~/Installs/rascript-cli/rascript-cli_v1.16.1_linux-x64
-DOLPHIN_DIR := /mnt/c/Program\ Files/Dolphin/2025Sep25/x64
+DOLPHIN_DIR := /mnt/c/Program\ Files/dolphin-2512-x64/Dolphin-x64
 
 load:
 	if [ -z "${checkpoint}" ]; then echo "empty checkpoint selected during load"; exit 1; fi;
