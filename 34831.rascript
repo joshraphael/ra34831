@@ -13,6 +13,13 @@ class Mission {
     checkpoints = []
 }
 
+difficulties = {
+    0x0000: "Easy",
+    0x0001: "Medium",
+    0x0002: "Hard",
+    0x0003: "Veteran"
+}
+
 missions = [
     Mission("Semper Fi", "mak", "pel1", [
         "makstart",
@@ -84,4 +91,29 @@ for mission in missions {
             )
         )
     )
+
+    for id in difficulties {
+        leaderboard(
+            title = format("{0} {1} Speedrun",  difficulties[id], mission.title),
+            description = format("Complete {0} as fast as possible on {1}", mission.title, difficulties[id]),
+            start = always_true(),
+            cancel = always_false(),
+            submit = (
+                Difficulty() == id &&
+                ascii_string_equals(
+                    address = MapName(),
+                    string = mission.key,
+                    length = 12,
+                    transform = a => prev(a)
+                ) &&
+                ascii_string_equals(
+                    address = MapName(),
+                    string = mission.next_key,
+                    length = 12
+                )
+            ),
+            value = MissionTimer(),
+            lower_is_better = true
+        )
+    }
 }
