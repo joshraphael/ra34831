@@ -20,6 +20,29 @@ difficulties = {
     0x0003: "Veteran"
 }
 
+leaderboard_ids = [
+    152625, // start
+    152684 // end
+]
+
+// missionMap = {
+//     "mak": "Semper Fi",
+//     "pel1": "Little Resistance",
+//     "pel2a": "Hard Landing (Part 1)",
+//     "pel2b": "Hard Landing (Part 2)",
+//     "sniper": "Vendetta",
+//     "see1": "Their Land, Their Blood",
+//     "pel1a": "Burn 'em Out",
+//     "pel1b": "Relentless",
+//     "see2": "Blood & Iron",
+//     "ber1": "Ring of Steel",
+//     "ber2": "Eviction",
+//     "oki2": "Blowtorch & Corkscrew",
+//     "oki3": "Breaking Point",
+//     "ber3": "Heart of the Riech",
+//     "ber3b": "Downfall"
+// }
+
 missions = [
     Mission("Semper Fi", "mak", "pel1", [
         "makstart",
@@ -51,8 +74,15 @@ missions = [
     Mission("Downfall", "ber3b", "outro", []),
 ]
 
+achievement_start = 575590
+achievement_offset = 0
+
+leaderboard_start = 152625
+leaderboard_offset = 0
+
 for mission in missions {
     achievement(
+        id = achievement_start + achievement_offset,
         title = mission.title,
         description = format("Complete {0} on any difficulty.", mission.title),
         points = 5,
@@ -71,8 +101,10 @@ for mission in missions {
         ),
         type = "progression"
     )
+    achievement_offset = achievement_offset + 1
 
     achievement(
+        id = achievement_start + achievement_offset,
         title = format("Veteran {0}", mission.title),
         description = format("Complete {0} on verteran difficulty.", mission.title),
         points = 10,
@@ -91,12 +123,25 @@ for mission in missions {
             )
         )
     )
+    achievement_offset = achievement_offset + 1
+
+    // temp achievments
+    achievement(
+        id = achievement_start + achievement_offset,
+        title = format("TEMP: {0}", mission.title),
+        description = format("TEMP: {0}", mission.title),
+        points = 1,
+        trigger = always_false(),
+        type = ""
+    )
+    achievement_offset = achievement_offset + 1
 
     for id in difficulties {
         leaderboard(
-            title = format("{0} {1} Speedrun",  difficulties[id], mission.title),
-            description = format("Complete {0} as fast as possible on {1}", mission.title, difficulties[id]),
-            start = always_true(),
+            id = leaderboard_start + leaderboard_offset,
+            title = format("{0} Speedrun: {1}",  difficulties[id], mission.title),
+            description = format("Complete {0} as fast as possible on {1} difficulty.", mission.title, difficulties[id]),
+            start = always_false(),
             cancel = always_false(),
             submit = (
                 Difficulty() == id &&
@@ -115,5 +160,16 @@ for mission in missions {
             value = MissionTimer(),
             lower_is_better = true
         )
+        leaderboard_offset = leaderboard_offset + 1
     }
 }
+
+function isInTitle() {
+    return ascii_string_equals(MapName(), "ui")
+}
+
+rich_presence_conditional_display(isInTitle(), "Title Screen")
+rich_presence_display("Playing Mission: {0} on {1}",
+    rich_presence_value("mission", MapName()),
+    rich_presence_lookup("Difficulty", Difficulty(), difficulties)
+)
