@@ -17,6 +17,9 @@ function CheckpointSubstring4() => 0x008691ca
 // Relentless - Deployable Browning M1919
 function ClipAmmo1() => word_be(0x00727de0)
 
+// Ring of Steel - PPSh-41
+function ClipAmmo2() => word_be(0x00727de2)
+
 // Level 1 - Grenades
 function ClipAmmo9() => word_be(0x00727df0)
 
@@ -39,10 +42,10 @@ class Mission {
 }
 
 difficulties = {
-    0x0000: "Easy",
-    0x0001: "Medium",
-    0x0002: "Hard",
-    0x0003: "veteran"
+    0x0000: "Recruit",
+    0x0001: "Regular",
+    0x0002: "Hardened",
+    0x0003: "Veteran"
 }
 
 leaderboard_ids = [
@@ -122,7 +125,7 @@ missions = [
         "mak9",
         "mak10",
         "makend"
-    ], "Cold Potatoe", "Complete Semper Fi on hardened or veteran difficulty without throwing a grenade.", (
+    ], "Cold Potatoe", "Complete Semper Fi on hardened or veteran difficulty without using the Type 100 SMG.", (
         ascii_string_equals(
             address = MapName(),
              string = "mak",
@@ -159,7 +162,9 @@ missions = [
             )
         ) &&
         never(
-            ClipAmmo9() < prev(ClipAmmo9()) ||
+            CurrentWeapon() == 0x0004 && // Type 100
+            prev(CurrentWeapon()) == CurrentWeapon() &&
+            ClipAmmo1() < prev(ClipAmmo1()) ||
             ascii_string_equals(
                 address = MapName(),
                 string = "ui",
@@ -232,7 +237,19 @@ missions = [
         )
     ),
     Mission("Blood & Iron", "see2", "ber1", [], "temp 1"),
-    Mission("Ring of Steel", "ber1", "ber2", [], "temp 2"),
+    Mission("Ring of Steel", "ber1", "ber2", [], "Making Space", "Complete Relentless on hardened or veteran difficulty without using the PPSh-41.",
+        ChallengeTrigger(
+            "ber1",
+            "ber2",
+            CheckpointSubstring1(),
+            "ber1start",
+            (
+                CurrentWeapon() == 0x0008 && // Deployable PPSh-41
+                prev(CurrentWeapon()) == CurrentWeapon() &&
+                ClipAmmo2() < prev(ClipAmmo2())
+            )
+        )
+    ),
     Mission("Eviction", "ber2", "oki2", [], "temp 3"),
     Mission("Blowtorch & Corkscrew", "oki2", "oki3", [], "temp 4"),
     Mission("Breaking Point", "oki3", "oki3_load", [], "temp 5"),
@@ -296,7 +313,7 @@ for mission in missions {
         id = achievement_start + achievement_offset,
         title = mission.challenge_title,
         description = mission.challenge_description,
-        points = 1,
+        points = 10,
         trigger = mission.challenge_trigger,
         type = ""
     )
@@ -323,7 +340,8 @@ for mission in missions {
             ),
             cancel = always_false(),
             submit = always_true(),
-            value = MissionTimer(),
+            value = MissionTimer() * 0x06,
+            format = "MILLISECS",
             lower_is_better = true
         )
         leaderboard_offset = leaderboard_offset + 1
@@ -338,8 +356,165 @@ function isInTitle() {
     )
 }
 
-rich_presence_conditional_display(isInTitle(), "Title Screen")
-rich_presence_display("Playing Mission: {0} on {1}",
-    rich_presence_value("mission", MapName()),
+// Need to make each individual mission its own rich presence lookup. RATools cant handle keys with similar strings in a dictionary
+
+// Semper Fi
+rich_presence_conditional_display(ascii_string_equals(
+        address = MapName(),
+        string = "mak",
+        length = 12
+    ),
+    "Playing Semper Fi on {0}",
     rich_presence_lookup("Difficulty", Difficulty(), difficulties)
 )
+
+// Little Resistance
+rich_presence_conditional_display(ascii_string_equals(
+        address = MapName(),
+        string = "pel1",
+        length = 12
+    ),
+    "Playing Little Resistance on {0}",
+    rich_presence_lookup("Difficulty", Difficulty(), difficulties)
+)
+
+// Hard Landing (Part 1)
+rich_presence_conditional_display(ascii_string_equals(
+        address = MapName(),
+        string = "pel2a",
+        length = 12
+    ),
+    "Playing Hard Landing (Part 1) on {0}",
+    rich_presence_lookup("Difficulty", Difficulty(), difficulties)
+)
+
+// Loading
+rich_presence_conditional_display(ascii_string_equals(
+        address = MapName(),
+        string = "pel2b_load",
+        length = 12
+    ),
+    "Loading..."
+)
+
+// Hard Landing (Part 2)
+rich_presence_conditional_display(ascii_string_equals(
+        address = MapName(),
+        string = "pel2b",
+        length = 12
+    ),
+    "Playing Hard Landing (Part 2) on {0}",
+    rich_presence_lookup("Difficulty", Difficulty(), difficulties)
+)
+
+// Vendetta
+rich_presence_conditional_display(ascii_string_equals(
+        address = MapName(),
+        string = "sniper",
+        length = 12
+    ),
+    "Playing Vendetta on {0}",
+    rich_presence_lookup("Difficulty", Difficulty(), difficulties)
+)
+
+// Their Land, Their Blood
+rich_presence_conditional_display(ascii_string_equals(
+        address = MapName(),
+        string = "see1",
+        length = 12
+    ),
+    "Playing Their Land, Their Blood on {0}",
+    rich_presence_lookup("Difficulty", Difficulty(), difficulties)
+)
+
+// Burn 'em Out
+rich_presence_conditional_display(ascii_string_equals(
+        address = MapName(),
+        string = "pel1a",
+        length = 12
+    ),
+    "Playing Burn 'em Out on {0}",
+    rich_presence_lookup("Difficulty", Difficulty(), difficulties)
+)
+
+// Relentless
+rich_presence_conditional_display(ascii_string_equals(
+        address = MapName(),
+        string = "pel1b",
+        length = 12
+    ),
+    "Playing Relentless on {0}",
+    rich_presence_lookup("Difficulty", Difficulty(), difficulties)
+)
+
+// Blood & Iron
+rich_presence_conditional_display(ascii_string_equals(
+        address = MapName(),
+        string = "see2",
+        length = 12
+    ),
+    "Playing Blood & Iron on {0}",
+    rich_presence_lookup("Difficulty", Difficulty(), difficulties)
+)
+
+// Ring of Steel
+rich_presence_conditional_display(ascii_string_equals(
+        address = MapName(),
+        string = "ber1",
+        length = 12
+    ),
+    "Playing Ring of Steel on {0}",
+    rich_presence_lookup("Difficulty", Difficulty(), difficulties)
+)
+
+// Eviction
+rich_presence_conditional_display(ascii_string_equals(
+        address = MapName(),
+        string = "ber2",
+        length = 12
+    ),
+    "Playing Eviction on {0}",
+    rich_presence_lookup("Difficulty", Difficulty(), difficulties)
+)
+
+// Blowtorch & Corkscrew
+rich_presence_conditional_display(ascii_string_equals(
+        address = MapName(),
+        string = "oki2",
+        length = 12
+    ),
+    "Playing Blowtorch & Corkscrew on {0}",
+    rich_presence_lookup("Difficulty", Difficulty(), difficulties)
+)
+
+// Breaking Point
+rich_presence_conditional_display(ascii_string_equals(
+        address = MapName(),
+        string = "oki3",
+        length = 12
+    ),
+    "Playing Breaking Point on {0}",
+    rich_presence_lookup("Difficulty", Difficulty(), difficulties)
+)
+
+// Heart of the Riech
+rich_presence_conditional_display(ascii_string_equals(
+        address = MapName(),
+        string = "ber3",
+        length = 12
+    ),
+    "Playing Heart of the Riech on {0}",
+    rich_presence_lookup("Difficulty", Difficulty(), difficulties)
+)
+
+// Downfall
+rich_presence_conditional_display(ascii_string_equals(
+        address = MapName(),
+        string = "ber3b",
+        length = 12
+    ),
+    "Playing Downfall on {0}",
+    rich_presence_lookup("Difficulty", Difficulty(), difficulties)
+)
+
+rich_presence_display("Title Screen")
