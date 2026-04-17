@@ -7,7 +7,9 @@ function MissionTimer() => dword_be(0x007238d8)
 function Difficulty() => word_be(0x0077032a)
 function CurrentWeapon() => word_be(0x00727cbe)
 function IronSights() => word_be(0x006d308e)
-function FlamethrowerAmmo() => word_be(0x00727dbc)
+function FlamethrowerAmmo() => dword_be(0x00727dbc)
+function FlamethrowerAmmo2() => dword_be(0x00727dc0)
+function FlamethrowerTankAmmo() => word_be(0x0083c9c6)
 function Checkpoint() => 0x008691a0
 function CheckpointSubstring1() => 0x008691bd
 function CheckpointSubstring2() => 0x008691c1
@@ -15,6 +17,7 @@ function CheckpointSubstring3() => 0x008691c5
 function CheckpointSubstring4() => 0x008691ca
 
 // Relentless - Deployable Browning M1919
+// Eviction - PPSh-41
 function ClipAmmo1() => word_be(0x00727de0)
 
 // Ring of Steel - PPSh-41
@@ -26,6 +29,12 @@ function ClipAmmo9() => word_be(0x00727df0)
 // Level 2 - Type 100
 function ClipAmmo4() => word_be(0x00727de6)
 
+// Hard Landing Part 1 - BAR
+function ClipAmmo5() => word_be(0x00727de8)
+
+// Breaking Point - Thompson
+function ClipAmmo3() => word_be(0x00727de4)
+
 function Stance() => word_be(0x00727cee)
 
 // Level 2 - Air Strike
@@ -35,7 +44,7 @@ class Mission {
     title = ""
     key = ""
     next_key = ""
-    checkpoints = []
+    regular_title = ""
     challenge_title = ""
     challenge_description = ""
     challenge_trigger = always_false()
@@ -112,20 +121,7 @@ function ChallengeTrigger(map_start_str, map_end_str, start_checkpoint_addr, sta
 }
 
 missions = [
-    Mission("Semper Fi", "mak", "pel1", [
-        "makstart",
-        "mak1",
-        "mak2",
-        "mak3",
-        "mak4",
-        "mak5",
-        "mak6",
-        "mak7",
-        "mak8",
-        "mak9",
-        "mak10",
-        "makend"
-    ], "Cold Potatoe", "Complete Semper Fi on hardened or veteran difficulty without using the Type 100 SMG.", (
+    Mission("Semper Fi", "mak", "pel1", "Night Attack", "Cold Potatoe", "Complete Semper Fi on hardened or veteran difficulty without using the Type 100 SMG.", (
         ascii_string_equals(
             address = MapName(),
              string = "mak",
@@ -172,7 +168,7 @@ missions = [
             )
         )
     )),
-    Mission("Little Resistance", "pel1", "pel2a", [], "Take Aim", "Complete Little Resistance on hardened or veteran difficulty without using the Type 100 SMG.", 
+    Mission("Little Resistance", "pel1", "pel2a", "Beach Front", "Take Aim", "Complete Little Resistance on hardened or veteran difficulty without using the Type 100 SMG.", 
         ChallengeTrigger(
             "pel1",
             "pel2a",
@@ -185,9 +181,33 @@ missions = [
             )
         )
     ),
-    Mission("Hard Landing Part 1", "pel2a", "pel2b_load", [], "temp 8"),
-    Mission("Hard Landing Part 2", "pel2b", "sniper", [], "temp 9"),
-    Mission("Vendetta", "sniper", "see1", [], "No Scope", "Complete Vendetta on hardened or veteran difficulty without using your iron sights.",
+    Mission("Hard Landing Part 1", "pel2a", "pel2b_load", "Keep Dry", "Watch the Tree Line", "Complete Hard Landing Part 1 on hardened or veteran difficulty without using the BAR.", 
+        ChallengeTrigger(
+            "pel2a",
+            "pel2b_load",
+            CheckpointSubstring1(),
+            "pel2astart",
+            (
+                CurrentWeapon() == 0x0009 && // BAR
+                prev(CurrentWeapon()) == CurrentWeapon() &&
+                ClipAmmo5() < prev(ClipAmmo5())
+            )
+        )
+    ),
+    Mission("Hard Landing Part 2", "pel2b", "sniper", "Crumble", "Bullets Are Better", "Complete Hard Landing Part 2 on hardened or veteran difficulty without using the flamethrower.",
+        ChallengeTrigger(
+            "pel2b",
+            "sniper",
+            CheckpointSubstring1(),
+            "pel2bstart",
+            (
+                CurrentWeapon() == 0x0011 && // Flamethrower
+                prev(CurrentWeapon()) == CurrentWeapon() &&
+                FlamethrowerAmmo() != 0x00000000
+            )
+        )
+    ),
+    Mission("Vendetta", "sniper", "see1", "Like A Rat", "No Scope", "Complete Vendetta on hardened or veteran difficulty without using your iron sights.",
     (
         ChallengeTrigger(
             "sniper",
@@ -199,7 +219,7 @@ missions = [
             )
         )
     )),
-    Mission("Their Land, Their Blood", "see1", "pel1a", [], "Stand Tall", "Complete Their Land, Their Blood on hardened or veteran difficulty without crouching.",
+    Mission("Their Land, Their Blood", "see1", "pel1a", "Schrek'd", "Stand Tall", "Complete Their Land, Their Blood on hardened or veteran difficulty without crouching.",
         ChallengeTrigger(
             "see1",
             "pel1a",
@@ -210,7 +230,7 @@ missions = [
             )
         )
     ),
-    Mission("Burn 'em Out", "pel1a", "pel1b", [], "Save the Trees", "Complete Burn 'em out on hardened or veteran difficulty without using the flamethrower.",
+    Mission("Burn 'em Out", "pel1a", "pel1b", "Trench Warfare", "Save the Trees", "Complete Burn 'em out on hardened or veteran difficulty without using the flamethrower.",
         ChallengeTrigger(
             "pel1a",
             "pel1b",
@@ -223,7 +243,7 @@ missions = [
             )
         )
     ),
-    Mission("Relentless", "pel1b", "see2", [], "Too Heavy For Me", "Complete Relentless on hardened or veteran difficulty without using the Deployable Browning M1919.",
+    Mission("Relentless", "pel1b", "see2", "Not Scared of the Dark", "Too Heavy for Me", "Complete Relentless on hardened or veteran difficulty without using the Deployable Browning M1919.",
         ChallengeTrigger(
             "pel1b",
             "see2",
@@ -236,26 +256,96 @@ missions = [
             )
         )
     ),
-    Mission("Blood & Iron", "see2", "ber1", [], "temp 1"),
-    Mission("Ring of Steel", "ber1", "ber2", [], "Making Space", "Complete Relentless on hardened or veteran difficulty without using the PPSh-41.",
+    Mission("Blood & Iron", "see2", "ber1", "Invincible", "Keeping Cool", "Complete Blood & Iron on hardened or veteran difficulty without using the tanks flamethrower.",
+        ChallengeTrigger(
+            "see2",
+            "ber1",
+            CheckpointSubstring1(),
+            "see2start",
+            (
+                prev(FlamethrowerTankAmmo()) == 0x0000 &&
+                FlamethrowerTankAmmo() != 0x0001
+            )
+        )
+    ),
+    Mission("Ring of Steel", "ber1", "ber2", "The Invasion Begins", "Making Space", "Complete Relentless on hardened or veteran difficulty without using the PPSh-41.",
         ChallengeTrigger(
             "ber1",
             "ber2",
             CheckpointSubstring1(),
             "ber1start",
             (
-                CurrentWeapon() == 0x0008 && // Deployable PPSh-41
+                CurrentWeapon() == 0x0008 && // PPSh-41
                 prev(CurrentWeapon()) == CurrentWeapon() &&
                 ClipAmmo2() < prev(ClipAmmo2())
             )
         )
     ),
-    Mission("Eviction", "ber2", "oki2", [], "temp 3"),
-    Mission("Blowtorch & Corkscrew", "oki2", "oki3", [], "temp 4"),
-    Mission("Breaking Point", "oki3", "oki3_load", [], "temp 5"),
-    Mission("Heart of the Riech", "ber3", "ber3b", [], "temp 6"),
-    Mission("Downfall", "ber3b", "outro", [], "temp 7"),
+    Mission("Eviction", "ber2", "oki2", "Sewer Dweller", "Hallow Halls", "Complete Eviction on hardened or veteran difficulty without using the PPSh-41.",
+        ChallengeTrigger(
+            "ber2",
+            "oki2",
+            CheckpointSubstring1(),
+            "ber2start",
+            (
+                CurrentWeapon() == 0x0003 && // PPSh-41
+                prev(CurrentWeapon()) == CurrentWeapon() &&
+                ClipAmmo1() < prev(ClipAmmo1())
+            )
+        )
+    ),
+    Mission("Blowtorch & Corkscrew", "oki2", "oki3", "Bunker Boom", "Storm Stormer", "Complete Blowtorch & Corkscrew on hardened or veteran difficulty without using the flamethrower.",
+        ChallengeTrigger(
+            "oki2",
+            "oki3",
+            CheckpointSubstring1(),
+            "oki2start",
+            (
+                CurrentWeapon() == 0x0016 && // Flamethrower
+                prev(CurrentWeapon()) == CurrentWeapon() &&
+                FlamethrowerAmmo2() != 0x00000000
+            )
+        )
+    ),
+    Mission("Breaking Point", "oki3", "oki3_load", "Stronghold Secured", "Stopping Tommy", "Complete Breaking Point on hardened or veteran difficulty without using the Thompson.",
+        ChallengeTrigger(
+            "oki3",
+            "oki3_load",
+            CheckpointSubstring1(),
+            "oki3start",
+            (
+                CurrentWeapon() == 0x0006 && // Thompson
+                prev(CurrentWeapon()) == CurrentWeapon() &&
+                ClipAmmo3() < prev(ClipAmmo3())
+            )
+        )
+    ),
+    Mission("Heart of the Riech", "ber3", "ber3b", "Deep", "Eye of Storm", "Complete Heart of the Riech on hardened or veteran difficulty without using your iron sights.",
+    (
+        ChallengeTrigger(
+            "ber3",
+            "ber3b",
+            CheckpointSubstring2(),
+            "ber31",
+            (
+                IronSights() == 0x0001
+            )
+        )
+    )),
+    Mission("Downfall", "ber3b", "outro", "Wave Your Flag", "Uprise", "Complete Downfall on hardened or veteran difficulty without going prone.",
+        ChallengeTrigger(
+            "ber3b",
+            "outro",
+            CheckpointSubstring1(),
+            "ber3bstart",
+            (
+                Stance() == 0x000b
+            )
+        )
+    ),
 ]
+
+
 
 achievement_start = 575590
 achievement_offset = 0
@@ -266,7 +356,7 @@ leaderboard_offset = 0
 for mission in missions {
     achievement(
         id = achievement_start + achievement_offset,
-        title = mission.title,
+        title = mission.regular_title,
         description = format("Complete {0} on any difficulty.", mission.title),
         points = 5,
         trigger = (
