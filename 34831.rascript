@@ -234,7 +234,7 @@ missions = [
         )
     ),
     "682999", "683000", "683001"),
-    Mission("Their Land, Their Blood", "see1", "pel1a", "Schrek'd", "Now It Is Their Land...Their People...Their Blood", "Stand Tall", "Complete \"Their Land, Their Blood\" on Hardened or Veteran difficulty without crouching.",
+    Mission("Their Land, Their Blood", "see1", "pel1a", "Schrek'd", "Now It Is Their Land...Their People...Their Blood", "Stand Tall", "Complete \"Their Land, Their Blood\" on Hardened or Veteran difficulty without crouching or riding a tank.",
         ChallengeTrigger(
             "see1",
             "pel1a",
